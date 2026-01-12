@@ -1,0 +1,63 @@
+MLSW-Standby
+
+Switch>enable
+Switch#conf t
+Switch(config)#hostname MLSW-Standby
+
+MLSW-Standby(config)#vlan 2
+MLSW-Standby(config-vlan)#name Production-Segment
+MLSW-Standby(config-vlan)#exit
+
+MLSW-Standby(config)#vlan 3
+MLSW-Standby(config-vlan)#name UAT-Segment
+MLSW-Standby(config-vlan)#exit
+
+MLSW-Standby(config)#vlan 4
+MLSW-Standby(config-vlan)#name VM-Segment
+MLSW-Standby(config-vlan)#exit
+
+MLSW-Standby(config)#interface vlan 2
+MLSW-Standby(config-if)#ip address 10.20.2.3 255.255.255.0
+MLSW-Standby(config-if)#standby 2 priority 110
+MLSW-Standby(config-if)#standby 2 ip 10.20.2.1
+MLSW-Standby(config-if)#exit
+
+MLSW-Standby(config)#interface vlan 3
+MLSW-Standby(config-if)#ip address 10.20.3.3 255.255.255.0
+MLSW-Standby(config-if)#standby 3 priority 110
+MLSW-Standby(config-if)#standby 3 ip 10.20.3.1
+MLSW-Standby(config-if)#exit
+
+MLSW-Standby(config)#interface vlan 4
+MLSW-Standby(config)#interface vlan 4
+MLSW-Standby(config-if)#ip address 10.20.4.3 255.255.255.0
+MLSW-Standby(config-if)#standby 4 priority 110
+MLSW-Standby(config-if)#standby 4 ip 10.20.4.1
+MLSW-Standby(config-if)#exit
+
+MLSW-Standby(config)#interface range gigabitEthernet 1/0/1-3
+MLSW-Standby(config-if-range)#switchport mode trunk
+MLSW-Standby(config-if-range)#exit
+
+MLSW-Standby(config)#ip routing
+
+MLSW-Standby(config)#interface gigabitEthernet 1/0/24
+MLSW-Standby(config-if)#description Link-R-09
+MLSW-Standby(config-if)#no switchport
+MLSW-Standby(config-if)#ip address 10.10.1.6 255.255.255.252
+MLSW-Standby(config-if)#no shutdown
+MLSW-Standby(config-if)#exit
+
+
+
+MLSW-Standby(config)#router ospf 2
+MLSW-Standby(config-router)#router-id 11.11.11.11
+
+MLSW-Standby(config-router)#network 10.10.1.4 0.0.0.3 area 0
+MLSW-Standby(config-router)#network 10.10.2.0 0.0.0.255 area 0
+MLSW-Standby(config-router)#network 10.10.3.0 0.0.0.255 area 0
+MLSW-Standby(config-router)#network 10.10.4.0 0.0.0.255 area 0
+MLSW-Standby(config-router)#passive-interface vlan2
+MLSW-Standby(config-router)#passive-interface vlan3
+MLSW-Standby(config-router)#passive-interface vlan4
+MLSW-Standby(config-router)#exit

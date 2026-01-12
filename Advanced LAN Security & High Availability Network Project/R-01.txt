@@ -1,0 +1,93 @@
+R-01
+
+Router>enable
+Router#conf t
+Router(config)#hostname R-01
+
+R-01(config)#interface gigabitEthernet 0/0/0
+R-01(config-if)#description SW-01
+R-01(config-if)#ip address 172.16.6.254 255.255.255.128
+R-01(config-if)#ip helper-address 10.20.2.14
+R-01(config-if)#no shutdown
+R-01(config-if)#exit
+
+R-01(config)#interface gigabitEthernet 0/0/1
+R-01(config-if)#description SW-02
+R-01(config-if)#ip address 172.16.7.190 255.255.255.192
+R-01(config-if)#ip helper-address 10.20.2.14
+R-01(config-if)#no shutdown
+R-01(config-if)#exit
+
+R-01(config)#interface serial 0/1/0
+R-01(config-if)#description Link-R-02
+R-01(config-if)#ip address 172.16.8.113 255.255.255.252
+R-01(config-if)#no shutdown
+R-01(config-if)#exit
+
+R-01(config)#router ospf 2
+R-01(config-router)#router-id 1.1.1.1
+R-01(config-router)#network 172.16.6.128 0.0.0.127 area 0
+R-01(config-router)#network 172.16.7.128 0.0.0.63 area 0
+R-01(config-router)#network 172.16.8.112 0.0.0.3 area 0
+R-01(config-router)#passive-interface gigabitEthernet 0/0/0
+R-01(config-router)#passive-interface gigabitEthernet 0/0/1
+R-01(config-router)#exit
+
+NTP
+
+R-01(config)#ntp server 10.20.2.10
+R-01(config)#ntp update-calendar 
+R-01(config)#ntp authentication-key 2 md5 NTP-TEMP
+R-01(config)#ntp trusted-key 2
+R-01(config)#exit
+
+Syslog
+R-01(config)#logging host 10.20.2.23
+R-01(config)#logging buffered 
+R-01(config)#logging on
+R-01(config)#logging trap
+R-01(config)#logging userinfo 
+R-01(config)#logging console
+R-01(config)#service timestamps log datetime msec
+
+R-01>enable
+R-01#configure terminal 
+Enter configuration commands, one per line.  End with CNTL/Z.
+R-01(config)#banner motd *
+Enter TEXT message.  End with the character '*'.
+#####################################################
+This is Secure area. Please Enter your Authentication.
+#####################################################
+*
+
+R-01(config)# 
+R-01(config)#enable secret HAsintha@2520.LK 
+R-01(config)#line console 0
+R-01(config-line)#password hASintha@2520.LK.lk 
+R-01(config-line)#exec-timeout 15
+R-01(config-line)#login
+R-01(config-line)#exit
+R-01(config)# 
+R-01(config)#security passwords min-length 10
+R-01(config)#service password-encryption 
+R-01(config)#ip domain-name sltsc.lk
+R-01(config)#crypto key generate rsa 
+The name for the keys will be: R-01.sltsc.lk
+Choose the size of the key modulus in the range of 360 to 4096 for your
+  General Purpose Keys. Choosing a key modulus greater than 512 may take
+  a few minutes.
+
+How many bits in the modulus [512]: 2048
+% Generating 2048 bit RSA keys, keys will be non-exportable...[OK]
+
+R-01(config)# 
+*Jan 4 6:39:0.323: %SSH-5-ENABLED: SSH 1.99 has been enabled
+R-01(config)#
+R-01(config)#username sshadmin secret HaSintha@s$H.Lk
+R-01(config)#ip ssh Version 2
+R-01(config)#
+R-01(config)#line vty 0
+R-01(config-line)#transport input ssh
+R-01(config-line)#login local 
+R-01(config-line)#exec-timeout 20
+R-01(config-line)#exit

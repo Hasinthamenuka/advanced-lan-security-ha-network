@@ -1,0 +1,283 @@
+Other SW
+
+SW-07
+
+Switch>enable
+Switch#conf t
+Switch(config)#hostname SW-07
+
+SW-07(config)#interface range fastEthernet 0/3-24
+SW-07(config-if-range)#shutdown
+SW-07(config-if-range)#exit
+
+SW-07(config)#interface fastEthernet 0/1
+SW-07(config-if)#switchport mode access
+SW-07(config-if)#switchport port-security 
+SW-07(config-if)#switchport port-security mac-address 0002.1772.85e6
+SW-07(config-if)#switchport port violation restrict
+SW-07(config-if)#exit
+
+SW-07(config)#interface fastEthernet 0/2
+SW-07(config-if)#switchport mode access
+SW-07(config-if)#switchport port-security 
+SW-07(config-if)#switchport port-security mac-address 00d0.97b5.8eae
+SW-07(config-if)#switchport port violation restrict
+SW-07(config-if)#exit
+
+SW-07(config)#interface gigabitEthernet 0/1
+SW-07(config-if)#switchport mode access
+SW-07(config-if)#switchport port-security 
+SW-07(config-if)#switchport port-security mac-address 0050.0fea.dc02
+SW-07(config-if)#switchport port violation restrict
+SW-07(config-if)#exit
+
+SW-12
+
+Switch>enable
+Switch(config)#hostname SW-12
+
+SW-12(config)#interface range fastEthernet 0/3-24
+SW-12(config-if-range)#shutdown
+SW-12(config-if-range)#exit
+
+SW-12(config)#interface fastEthernet 0/1
+SW-12(config-if)#switchport mode access
+SW-12(config-if)#switchport port-security 
+SW-12(config-if)#switchport port-security mac-address 0002.172e.be46
+SW-12(config-if)#switchport port violation restrict
+SW-12(config-if)#exit
+
+SW-12(config)#interface fastEthernet 0/2
+SW-12(config-if)#switchport mode access
+SW-12(config-if)#switchport port-security 
+SW-12(config-if)#switchport port-security mac-address 0090.2b57.d16c
+SW-12(config-if)#switchport port violation restrict
+SW-12(config-if)#exit
+
+SW-12(config)#interface gigabitEthernet 0/1
+SW-12(config-if)#switchport mode access
+SW-12(config-if)#switchport port-security 
+SW-12(config-if)#switchport port-security mac-address 000c.85b7.3301
+SW-12(config-if)#switchport port violation restrict
+SW-12(config-if)#exit
+
+SW-10
+
+Switch>enable
+Switch#conf t
+Switch(config)#hostname SW-10
+
+SW-10(config)#interface range fastEthernet 0/3-24
+SW-10(config-if-range)#shutdown
+SW-10(config-if-range)#exit
+
+SW-10(config)#interface fastEthernet 0/1
+SW-10(config-if)#switchport mode access
+SW-10(config-if)#switchport port-security 
+SW-10(config-if)#switchport port-security mac-address 0001.646a.8411
+SW-10(config-if)#switchport port violation restrict
+SW-10(config-if)#exit
+
+SW-10(config)#interface fastEthernet 0/2
+SW-10(config-if)#switchport mode access
+SW-10(config-if)#switchport port-security 
+SW-10(config-if)#switchport port-security mac-address 00e0.b061.2bbb
+SW-10(config-if)#switchport port violation restrict
+SW-10(config-if)#exit
+
+SW-10(config)#interface gigabitEthernet 0/1
+SW-10(config-if)#switchport mode access
+SW-10(config-if)#switchport port-security 
+SW-10(config-if)#switchport port-security mac-address 00e0.f798.6201
+SW-10(config-if)#switchport port violation restrict
+SW-10(config-if)#exit
+
+SW-11
+
+Switch>enable
+Switch#conf t
+Switch(config)#hostname SW-11
+
+SW-11(config)#interface range fastEthernet 0/1-24
+SW-11(config-if-range)#shutdown
+SW-11(config-if-range)#exit
+
+SW-11(config)#interface gigabitEthernet 0/1
+SW-11(config-if)#switchport mode access
+SW-11(config-if)#switchport port-security 
+SW-11(config-if)#switchport port-security mac-address 00e0.f798.6202
+SW-11(config-if)#switchport port violation restrict
+SW-11(config-if)#exit
+
+SW-08
+
+Switch>enable
+Switch#conf t
+Switch(config)#hostname SW-08
+
+SW-08(config)#interface range fastEthernet 0/3-24
+SW-08(config-if-range)#shutdown
+SW-08(config-if-range)#exit
+
+SW-08(config)#interface fastEthernet 0/1
+SW-08(config-if)#switchport mode access
+SW-08(config-if)#switchport port-security 
+SW-08(config-if)#switchport port-security mac-address 000a.f3c9.e969
+SW-08(config-if)#switchport port violation restrict
+SW-08(config-if)#exit
+
+SW-08(config)#interface fastEthernet 0/2
+SW-08(config-if)#switchport mode access
+SW-08(config-if)#switchport port-security 
+SW-08(config-if)#switchport port-security mac-address 0001.c78c.45ad
+SW-08(config-if)#switchport port violation restrict
+SW-08(config-if)#exit
+
+SW-08(config)#interface gigabitEthernet 0/1
+SW-08(config-if)#switchport mode access
+SW-08(config-if)#switchport port-security 
+SW-08(config-if)#switchport port-security mac-address 000c.8576.3201
+SW-08(config-if)#switchport port violation restrict
+SW-08(config-if)#exit
+
+SW-09
+
+Switch>enable
+Switch#conf t
+Switch(config)#hostname SW-09
+
+SW-09(config)#interface range fastEthernet 0/3-24
+SW-09(config-if-range)#shutdown
+SW-09(config-if-range)#exit
+
+SW-09(config)#interface fastEthernet 0/1
+SW-09(config-if)#switchport mode access
+SW-09(config-if)#switchport port-security 
+SW-09(config-if)#switchport port-security mac-address 0001.9607.9531
+SW-09(config-if)#switchport port violation restrict
+SW-09(config-if)#exit
+
+SW-09(config)#interface gigabitEthernet 0/1
+SW-09(config-if)#switchport mode access
+SW-09(config-if)#switchport port-security 
+SW-09(config-if)#switchport port-security mac-address 000c.8576.3202
+SW-09(config-if)#exit
+
+SW-05
+
+Switch>enable
+Switch#conf t
+Switch(config)#hostname SW-05
+
+SW-05(config)#interface range fastEthernet 0/3-24
+SW-05(config-if-range)#shutdown
+SW-05(config-if-range)#exit
+
+SW-05(config)#interface fastEthernet 0/1
+SW-05(config-if)#switchport mode access
+SW-05(config-if)#switchport port-security 
+SW-05(config-if)#switchport port-security mac-address 000c.85b9.8023
+SW-05(config-if)#switchport port violation restrict
+SW-05(config-if)#exit
+
+SW-05(config)#interface fastEthernet 0/2
+SW-05(config-if)#switchport mode access
+SW-05(config-if)#switchport port-security 
+SW-05(config-if)#switchport port-security mac-address 0002.1711.78e8
+SW-05(config-if)#switchport port violation restrict
+SW-05(config-if)#exit
+
+SW-05(config)#interface gigabitEthernet 0/1
+SW-05(config-if)#switchport mode access
+SW-05(config-if)#switchport port-security 
+SW-05(config-if)#switchport port-security mac-address 00e0.f75d.2e02
+SW-05(config-if)#exit
+
+SW-04
+
+Switch>enable
+Switch#conf t
+Switch(config)#hostname SW-04
+
+SW-04(config)#interface range fastEthernet 0/3-24
+SW-04(config-if-range)#shutdown
+SW-04(config-if-range)#exit
+
+SW-04(config)#interface fastEthernet 0/1
+SW-04(config-if)#switchport mode access
+SW-04(config-if)#switchport port-security 
+SW-04(config-if)#switchport port-security mac-address 0003.e4ee.5b68
+SW-04(config-if)#switchport port violation restrict
+SW-04(config-if)#exit
+
+SW-04(config)#interface fastEthernet 0/2
+SW-04(config-if)#switchport mode access
+SW-04(config-if)#switchport port-security 
+SW-04(config-if)#switchport port-security mac-address 00e0.f93d.a700
+SW-04(config-if)#switchport port violation restrict
+SW-04(config-if)#exit
+
+SW-04(config)#interface gigabitEthernet 0/1
+SW-04(config-if)#switchport mode access
+SW-04(config-if)#switchport port-security 
+SW-04(config-if)#switchport port-security mac-address 00e0.f75d.2e01
+SW-04(config-if)#exit
+
+SW-02
+
+Switch>enable
+Switch#conf t
+Switch(config)#hostname SW-02
+
+SW-02(config)#interface range fastEthernet 0/3-24
+SW-02(config-if-range)#shutdown
+SW-02(config-if-range)#exit
+
+SW-02(config)#interface fastEthernet 0/1
+SW-02(config-if)#switchport mode access
+SW-02(config-if)#switchport port-security 
+SW-02(config-if)#switchport port-security mac-address 0060.3ecc.b8d7
+SW-02(config-if)#switchport port violation restrict
+SW-02(config-if)#exit
+
+SW-02(config)#interface fastEthernet 0/2
+SW-02(config-if)#switchport mode access
+SW-02(config-if)#switchport port-security 
+SW-02(config-if)#switchport port-security mac-address 0030.a304.16d2
+SW-02(config-if)#switchport port violation restrict
+SW-02(config-if)#exit
+
+SW-02(config)#interface gigabitEthernet 0/1
+SW-02(config-if)#switchport mode access
+SW-02(config-if)#switchport port-security 
+SW-02(config-if)#switchport port-security mac-address 0004.9a25.9a02
+SW-02(config-if)#exit
+
+
+SW-01
+
+Switch>enable
+Switch#conf t
+Switch(config)#interface range fastEthernet 0/3-24
+Switch(config-if-range)#shutdown
+Switch(config-if-range)#exit
+
+Switch(config)#interface fastEthernet 0/1
+Switch(config-if)#switchport mode access
+Switch(config-if)#switchport port-security 
+Switch(config-if)#switchport port-security mac-address 0007.ec70.3495
+Switch(config-if)#switchport port violation restrict
+Switch(config-if)#exit
+
+Switch(config)#interface fastEthernet 0/2
+Switch(config-if)#switchport mode access
+Switch(config-if)#switchport port-security 
+Switch(config-if)#switchport port-security mac-address 0030.f2d3.0904
+Switch(config-if)#switchport port violation restrict
+Switch(config-if)#exit
+
+Switch(config)#interface gigabitEthernet 0/1
+Switch(config-if)#switchport mode access
+Switch(config-if)#switchport port-security 
+Switch(config-if)#switchport port-security mac-address 0004.9a25.9a01
+Switch(config-if)#exit

@@ -1,0 +1,109 @@
+MLSW-Active
+
+Switch>enable
+Switch#conf t	
+Switch(config)#hostname MLSW-Active
+
+MLSW-Active(config)#vlan 2
+MLSW-Active(config-vlan)#name Production-Segment
+MLSW-Active(config-vlan)#exit
+
+MLSW-Active(config)#vlan 3
+MLSW-Active(config-vlan)#name UAT-Segment
+MLSW-Active(config-vlan)#exit
+
+MLSW-Active(config)#vlan 4
+MLSW-Active(config-vlan)#name VM-Segment
+MLSW-Active(config-vlan)#exit
+
+MLSW-Active(config)#interface vlan 2
+MLSW-Active(config-if)#ip address 10.20.2.2 255.255.255.0
+MLSW-Active(config-if)#standby 2 priority 150
+MLSW-Active(config-if)#standby 2 ip 10.20.2.1
+MLSW-Active(config-if)#exit
+
+MLSW-Active(config)#interface vlan 3
+MLSW-Active(config-if)#ip address 10.20.3.2 255.255.255.0
+MLSW-Active(config-if)#standby 3 priority 150
+MLSW-Active(config-if)#standby 3 ip 10.20.3.1
+MLSW-Active(config-if)#exit
+
+MLSW-Active(config)#interface vlan 4	
+MLSW-Active(config-if)#ip address 10.20.4.2 255.255.255.0
+MLSW-Active(config-if)#standby 4 priority 150
+MLSW-Active(config-if)#standby 4 ip 10.20.4.1
+MLSW-Active(config-if)#exit
+
+MLSW-Active(config)#interface range gigabitEthernet 1/0/1-3
+MLSW-Active(config-if-range)#switchport mode trunk
+MLSW-Active(config-if-range)#exit
+
+MLSW-Active(config)#ip routing
+
+MLSW-Active(config)#interface gigabitEthernet 1/0/24
+MLSW-Active(config-if)#description Link-R-09
+MLSW-Active(config-if)#no switchport
+MLSW-Active(config-if)#ip address 10.10.1.2 255.255.255.252
+MLSW-Active(config-if)#no shutdown
+MLSW-Active(config-if)#exit
+
+
+MLSW-Active(config)#router ospf 2
+MLSW-Active(config-router)#router-id 10.10.10.10
+
+MLSW-Active(config-router)#network 10.10.1.0 0.0.0.3 area 0
+MLSW-Active(config-router)#network 10.10.2.0 0.0.0.255 area 0
+MLSW-Active(config-router)#network 10.10.3.0 0.0.0.255 area 0
+MLSW-Active(config-router)#network 10.10.4.0 0.0.0.255 area 0
+MLSW-Active(config-router)#passive-interface vlan2
+MLSW-Active(config-router)#passive-interface vlan3
+MLSW-Active(config-router)#passive-interface vlan4
+MLSW-Active(config-router)#exit
+MLSW-Active(config)#
+
+MLSW-Active>enable
+MLSW-Active#configure terminal 
+Enter configuration commands, one per line.  End with CNTL/Z.
+MLSW-Active(config)#banner motd *
+Enter TEXT message.  End with the character '*'.
+#####################################################
+This is Secure area. Please Enter your Authentication.
+#####################################################
+*
+
+MLSW-Active(config)# 
+MLSW-Active(config)#enable secret HAsintha@2520.LK 
+MLSW-Active(config)#line console 0
+MLSW-Active(config-line)#password hASintha@2520.LK.lk 
+MLSW-Active(config-line)#exec-timeout 15
+MLSW-Active(config-line)#login
+MLSW-Active(config-line)#exit
+MLSW-Active(config)# 
+MLSW-Active(config)#security passwords min-length 10
+                      ^
+% Invalid input detected at '^' marker.
+	
+MLSW-Active(config)#service password-encryption 
+MLSW-Active(config)#ip domain-name sltsc.lk
+MLSW-Active(config)#crypto key generate rsa 
+The name for the keys will be: MLSW-Active.sltsc.lk
+Choose the size of the key modulus in the range of 360 to 4096 for your
+  General Purpose Keys. Choosing a key modulus greater than 512 may take
+  a few minutes.
+
+How many bits in the modulus [512]: 2048
+% Generating 2048 bit RSA keys, keys will be non-exportable...[OK]
+
+MLSW-Active(config)# 
+*Mar 1 7:6:29.386: %SSH-5-ENABLED: SSH 1.99 has been enabled
+MLSW-Active(config)#
+MLSW-Active(config)#username sshadmin secret HaSintha@s$H.Lk
+MLSW-Active(config)#ip ssh Version 2
+MLSW-Active(config)#
+MLSW-Active(config)#line vty 0
+MLSW-Active(config-line)#transport input ssh
+MLSW-Active(config-line)#login local 
+MLSW-Active(config-line)#exec-timeout 20
+MLSW-Active(config-line)#exit
+MLSW-Active(config)#
+MLSW-Active(config)#login block-for 600 attempts 4 within 60

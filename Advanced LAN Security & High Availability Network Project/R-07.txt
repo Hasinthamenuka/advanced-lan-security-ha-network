@@ -1,0 +1,105 @@
+R-07
+
+
+Router>enable
+Router#conf t
+Router(config)#hostname R-07
+
+R-07(config)#interface gigabitEthernet 0/0/0	
+R-07(config-if)#description SW-10
+R-07(config-if)#ip address 172.16.1.254 255.255.255.0
+R-07(config-if)#ip helper-address 10.20.2.14
+R-07(config-if)#no shutdown
+R-07(config-if)#exit
+
+R-07(config-if)#interface gigabitEthernet 0/0/1
+R-07(config-if)#description SW-11
+R-07(config-if)#ip address 172.16.8.62 255.255.255.224
+R-07(config-if)#ip helper-address 10.20.2.14
+R-07(config-if)#no shutdown
+R-07(config-if)#exit
+
+R-07(config)#interface serial 0/2/0
+R-07(config-if)#description Link-R-08
+R-07(config-if)#ip address 172.16.8.142 255.255.255.252
+R-07(config-if)#clock rate 64000
+R-07(config-if)#no shutdown
+R-07(config-if)#exit
+
+R-07(config)#interface serial 0/2/1
+R-07(config-if)#description Link-R-04
+R-07(config-if)#ip address 172.16.8.133 255.255.255.252
+R-07(config-if)#no shutdown
+R-07(config-if)#exit
+
+R-07(config)#router ospf 2
+R-07(config-router)#router-id 7.7.7.7
+R-07(config-router)#network 172.16.1.0 0.0.0.255 area 0
+R-07(config-router)#network 172.16.8.32 0.0.0.31 area 0
+R-07(config-router)#network 172.16.8.132 0.0.0.3 area 0
+R-07(config-router)#network 172.16.8.140 0.0.0.3 area 0
+R-07(config-router)#passive-interface gigabitEthernet 0/0/0
+R-07(config-router)#passive-interface gigabitEthernet 0/0/1
+R-07(config-router)#exit
+
+NTP
+
+R-07(config)#ntp server 10.20.2.10
+R-07(config)#ntp update-calendar 
+R-07(config)#ntp authentication-key 2 md5 NTP-TEMP
+R-07(config)#ntp trusted-key 2
+R-07(config)#exit
+
+Syslog
+
+R-07(config)#logging host 10.20.2.23
+R-07(config)#logging buffered 
+R-07(config)#logging on
+R-07(config)#logging trap
+R-07(config)#logging userinfo 
+R-07(config)#logging console
+R-07(config)#service timestamps log datetime msec
+
+R-07>enable
+R-07#configure terminal 
+Enter configuration commands, one per line.  End with CNTL/Z.
+R-07(config)#banner motd *
+Enter TEXT message.  End with the character '*'.
+#####################################################
+This is Secure area. Please Enter your Authentication.
+#####################################################
+*
+
+R-07(config)# 
+R-07(config)#enable secret HAsintha@2520.LK 
+R-07(config)#line console 0
+R-07(config-line)#password hASintha@2520.LK.lk 
+R-07(config-line)#exec-timeout 15
+R-07(config-line)#login
+R-07(config-line)#exit
+R-07(config)# 
+R-07(config)#security passwords min-length 10
+R-07(config)#service password-encryption 
+R-07(config)#ip domain-name sltsc.lk
+R-07(config)#crypto key generate rsa 
+The name for the keys will be: R-07.sltsc.lk
+Choose the size of the key modulus in the range of 360 to 4096 for your
+  General Purpose Keys. Choosing a key modulus greater than 512 may take
+  a few minutes.
+
+How many bits in the modulus [512]: 2048
+% Generating 2048 bit RSA keys, keys will be non-exportable...[OK]
+
+R-07(config)# 
+*Jan 4 6:43:18.983: %SSH-5-ENABLED: SSH 1.99 has been enabled
+R-07(config)#
+R-07(config)#username sshadmin secret HaSintha@s$H.Lk
+R-07(config)#ip ssh Version 2
+R-07(config)#
+R-07(config)#line vty 0
+R-07(config-line)#transport input ssh
+R-07(config-line)#login local 
+R-07(config-line)#exec-timeout 20
+R-07(config-line)#exit
+R-07(config)#
+R-07(config)#login block-for 600 attempts 4 within 60
